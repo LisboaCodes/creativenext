@@ -8,8 +8,8 @@
     <style>
         :root { --green: #2DB3A3; --green-dark: #239688; --green-light: #3FCFBD; --black: #1A1A1A; --black-light: #2D2D2D; --white: #FFFFFF; --gray: #F5F5F5; --gray-dark: #888888; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; width: 100%; max-width: 100vw; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
@@ -37,9 +37,9 @@
         .btn-outline { background: transparent; border: 2px solid var(--green); color: var(--green); }
         .btn-outline:hover { background: var(--green); color: var(--white); }
 
-        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 5% 80px; position: relative; background: var(--white); }
-        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(circle, rgba(45,179,163,0.08) 0%, transparent 70%); }
-        .hero-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 5% 80px; position: relative; background: var(--white); overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 60%; height: 150%; background: radial-gradient(circle, rgba(45,179,163,0.08) 0%, transparent 70%); }
+        .hero-content { max-width: 1400px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
         .hero-text h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; opacity: 0; animation: fadeInUp 0.8s ease 0.2s forwards; }
         .hero-text h1 .highlight { color: var(--green); }
         .hero-text p { font-size: 1.2rem; color: var(--gray-dark); line-height: 1.7; margin-bottom: 2rem; max-width: 500px; opacity: 0; animation: fadeInUp 0.8s ease 0.4s forwards; }
@@ -47,7 +47,7 @@
         .hero-stats { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.1); opacity: 0; animation: fadeInUp 0.8s ease 0.8s forwards; }
         .stat-number { font-family: 'Space Mono', monospace; font-size: 2.5rem; font-weight: 700; color: var(--green); }
         .stat-label { font-size: 0.9rem; color: var(--gray-dark); margin-top: 0.3rem; }
-        .hero-card { background: var(--black); border-radius: 24px; padding: 2.5rem; color: var(--white); width: 100%; max-width: 450px; opacity: 0; animation: fadeInUp 0.8s ease 0.4s forwards; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+        .hero-card { background: var(--black); border-radius: 24px; padding: 2.5rem; color: var(--white); width: 100%; max-width: 450px; opacity: 0; animation: fadeInUp 0.8s ease 0.4s forwards; box-shadow: 0 30px 60px rgba(0,0,0,0.2); position: relative; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
         .card-badge { background: var(--green); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
         .card-icon { width: 50px; height: 50px; background: rgba(45,179,163,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
@@ -58,8 +58,8 @@
         .graph-bar { flex: 1; background: linear-gradient(to top, var(--green), var(--green-light)); border-radius: 4px 4px 0 0; }
         .card-footer { display: flex; justify-content: space-between; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
         .floating-element { position: absolute; background: var(--white); padding: 1rem 1.5rem; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 0.8rem; animation: float 3s ease-in-out infinite; }
-        .floating-element.top-left { top: -20px; left: -30px; }
-        .floating-element.bottom-right { bottom: 30px; right: -40px; animation-delay: 1s; }
+        .floating-element.top-left { top: 0; left: 0; }
+        .floating-element.bottom-right { bottom: 30px; right: 0; animation-delay: 1s; }
         .floating-icon { width: 40px; height: 40px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--white); }
         .floating-text { font-weight: 600; font-size: 0.9rem; }
         .floating-subtext { font-size: 0.75rem; color: var(--gray-dark); }
@@ -69,8 +69,8 @@
         .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; }
         .section-subtitle { color: var(--gray-dark); font-size: 1.1rem; line-height: 1.6; }
 
-        .services { padding: 100px 5%; background: var(--gray); }
-        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1400px; margin: 0 auto; }
+        .services { padding: 100px 5%; background: var(--gray); overflow: hidden; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1400px; margin: 0 auto; width: 100%; }
         .service-card { background: var(--white); border-radius: 20px; padding: 2.5rem; position: relative; transition: all 0.4s; border: 1px solid rgba(0,0,0,0.05); }
         .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--green); transform: scaleX(0); transition: transform 0.4s; }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
@@ -85,8 +85,8 @@
         .service-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--green); font-weight: 600; text-decoration: none; transition: gap 0.3s; }
         .service-link:hover { gap: 0.8rem; }
 
-        .products { padding: 100px 5%; background: var(--white); }
-        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .products { padding: 100px 5%; background: var(--white); overflow: hidden; }
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
         .product-card { background: var(--white); border-radius: 24px; padding: 2.5rem; text-align: center; border: 2px solid var(--gray); transition: all 0.4s; text-decoration: none; color: var(--black); display: flex; flex-direction: column; align-items: center; }
         .product-card:hover { border-color: var(--green); transform: translateY(-10px); box-shadow: 0 20px 50px rgba(45,179,163,0.15); }
         .product-icon { width: 90px; height: 90px; background: linear-gradient(135deg, var(--green), var(--green-light)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--white); transition: transform 0.3s; }
@@ -97,7 +97,7 @@
         .product-cta svg { transition: transform 0.3s; }
         .product-card:hover .product-cta svg { transform: translateX(5px); }
 
-        .values { padding: 100px 5%; background: var(--gray); }
+        .values { padding: 100px 5%; background: var(--gray); overflow: hidden; }
         .values-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .values-list { display: grid; gap: 1.5rem; margin-top: 2rem; }
         .value-item { display: flex; gap: 1.2rem; padding: 1.5rem; background: var(--white); border-radius: 16px; transition: all 0.3s; }
@@ -112,8 +112,8 @@
         .metric-card-value { font-family: 'Space Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--green); }
         .metric-card-label { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
 
-        .process { padding: 100px 5%; background: var(--white); }
-        .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 1400px; margin: 0 auto; }
+        .process { padding: 100px 5%; background: var(--white); overflow: hidden; }
+        .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 1400px; margin: 0 auto; width: 100%; }
         .process-step { text-align: center; padding: 2rem; position: relative; }
         .process-step::after { content: ''; position: absolute; top: 50px; right: -50%; width: 100%; height: 2px; background: linear-gradient(90deg, var(--green), transparent); opacity: 0.3; }
         .process-step:last-child::after { display: none; }
@@ -121,7 +121,7 @@
         .step-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; }
         .step-description { color: var(--gray-dark); font-size: 0.95rem; }
 
-        .cta { padding: 100px 5%; background: var(--gray); }
+        .cta { padding: 100px 5%; background: var(--gray); overflow: hidden; }
         .cta-content { max-width: 1200px; margin: 0 auto; background: linear-gradient(135deg, var(--green), var(--green-dark)); border-radius: 30px; padding: 4rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; position: relative; overflow: hidden; }
         .cta-content::before { content: ''; position: absolute; top: -50%; right: -10%; width: 50%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%); }
         .cta-text { position: relative; z-index: 1; }
@@ -131,8 +131,8 @@
         .cta .btn { background: var(--white); color: var(--green); }
         .cta .btn:hover { background: var(--black); color: var(--white); }
 
-        footer { background: var(--black); color: var(--white); padding: 60px 5% 30px; }
-        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        footer { background: var(--black); color: var(--white); padding: 60px 5% 30px; overflow: hidden; }
+        .footer-content { max-width: 1400px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .footer-brand { max-width: 300px; }
         .footer-brand .logo { color: var(--white); margin-bottom: 1rem; }
         .footer-brand p { color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 1.5rem; }
