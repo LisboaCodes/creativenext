@@ -3,7 +3,11 @@
     "allow": [
       "Bash(git init:*)",
       "Bash(git branch:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial commit: CreativeNext website\n\n- Página inicial com serviços completos\n- Página de Marketing & Conteúdo com planos Creative Start, Plus e Elite\n- Página de Sistemas com 20 sistemas disponíveis\n- Página de Tráfego Pago\n- Design moderno e responsivo\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
