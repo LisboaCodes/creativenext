@@ -196,6 +196,59 @@
             color: white;
         }
 
+        /* Location Section */
+        .location {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+        }
+        .location-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .location-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(45,179,163,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green);
+        }
+        .location-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        .location-address {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .location-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .location-link:hover {
+            gap: 0.8rem;
+            color: var(--green-light);
+        }
+
         /* Social Links */
         .social-links {
             display: flex;
@@ -203,7 +256,7 @@
             gap: 1rem;
             margin-bottom: 2rem;
             opacity: 0;
-            animation: fadeInUp 0.8s ease 0.8s forwards;
+            animation: fadeInUp 0.8s ease 0.9s forwards;
         }
         .social-link {
             width: 50px;
@@ -229,9 +282,9 @@
             text-align: center;
             padding: 2rem 0 1rem;
             color: rgba(255,255,255,0.4);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             opacity: 0;
-            animation: fadeInUp 0.8s ease 0.9s forwards;
+            animation: fadeInUp 0.8s ease 1s forwards;
         }
         .footer-logo {
             display: inline-flex;
@@ -240,9 +293,22 @@
             color: var(--white);
             text-decoration: none;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
         }
         .footer-logo span { color: var(--green); }
+        .footer-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            margin-bottom: 0.8rem;
+        }
+        .footer-divider {
+            width: 60px;
+            height: 2px;
+            background: rgba(45,179,163,0.3);
+            margin: 1rem auto;
+        }
 
         /* Animations */
         @keyframes fadeInDown {
@@ -260,6 +326,7 @@
             .profile h1 { font-size: 1.5rem; }
             .link-item { padding: 1rem; }
             .link-title { font-size: 1rem; }
+            .location-address { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -399,9 +466,35 @@
             </a>
         </div>
 
+        <!-- Location Section -->
+        <div class="location">
+            <div class="location-header">
+                <div class="location-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <div class="location-title">📍 Nosso Endereço</div>
+            </div>
+            <div class="location-address">
+                Rua Monte Alegre, 11 - Sala 14<br>
+                Galeria Porto Plaza (em frente ao Nunes Peixoto)<br>
+                Nossa Senhora da Glória - SE
+            </div>
+            <a href="https://maps.app.goo.gl/6QkYcHBTV2d7ReXf6" target="_blank" class="location-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+                Ver no Google Maps →
+            </a>
+        </div>
+
         <!-- Social Links -->
         <div class="social-links">
-            <a href="https://instagram.com/creativenext" target="_blank" class="social-link" title="Instagram">
+            <a href="https://www.instagram.com/creativenext.ofc" target="_blank" class="social-link" title="Instagram">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="2" y="2" width="20" height="20" rx="5"/>
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
@@ -431,8 +524,12 @@
         <!-- Footer -->
         <div class="footer">
             <a href="index.html" class="footer-logo">CREATIVE<span>NEXT</span></a>
-            <p>Nossa Senhora da Glória - SE</p>
-            <p style="margin-top: 0.5rem;">© 2025 CreativeNext. Feito com 💚</p>
+            <div class="footer-divider"></div>
+            <div class="footer-info">
+                <p>CNPJ: 52.875.660/0001-10</p>
+                <p>Nossa Senhora da Glória - SE</p>
+            </div>
+            <p style="margin-top: 0.8rem; color: rgba(255,255,255,0.3);">© 2025 CreativeNext. Feito com 💚</p>
         </div>
     </div>
 
