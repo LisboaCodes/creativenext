@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing & Conteúdo | CreativeNext</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --green: #2DB3A3; --green-dark: #239688; --green-light: #3FCFBD; --black: #1A1A1A; --black-light: #2D2D2D; --white: #FFFFFF; --gray: #F5F5F5; --gray-dark: #888888; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        header.scrolled { padding: 0.7rem 5%; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        .logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.4rem; color: var(--black); text-decoration: none; }
+        .logo-icon { width: 45px; height: 45px; }
+        .logo-icon svg { width: 100%; height: 100%; }
+        .logo span { color: var(--green); }
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { text-decoration: none; color: var(--black); font-weight: 500; }
+        nav a:hover { color: var(--green); }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2rem; background: var(--green); color: var(--white); text-decoration: none; font-weight: 600; border-radius: 50px; transition: all 0.3s; }
+        .btn:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(45,179,163,0.3); }
+
+        .page-hero { padding: 160px 5% 80px; background: linear-gradient(180deg, var(--gray) 0%, var(--white) 100%); text-align: center; position: relative; }
+        .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(45,179,163,0.1) 0%, transparent 50%); }
+        .page-hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .page-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(45,179,163,0.1); color: var(--green); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem; }
+        .page-hero h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 1.5rem; }
+        .page-hero h1 .highlight { color: var(--green); }
+        .page-hero p { font-size: 1.2rem; color: var(--gray-dark); margin-bottom: 2rem; }
+
+        .services { padding: 80px 5%; background: var(--white); }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+        .section-title { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; }
+        .section-subtitle { color: var(--gray-dark); font-size: 1.1rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .service-card { background: var(--gray); border-radius: 20px; padding: 2rem; transition: all 0.4s; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .service-icon { width: 60px; height: 60px; background: var(--green); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--white); }
+        .service-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; }
+        .service-description { color: var(--gray-dark); font-size: 0.95rem; margin-bottom: 1rem; }
+        .service-features { list-style: none; }
+        .service-features li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .service-features li svg { width: 16px; height: 16px; color: var(--green); flex-shrink: 0; }
+
+        .pricing { padding: 100px 5%; background: linear-gradient(180deg, #0a0a0f 0%, #0d1117 50%, #0a0a0f 100%); position: relative; overflow: hidden; }
+        .pricing::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(45,179,163,0.1) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(45,179,163,0.05) 0%, transparent 40%); }
+        .stars { position: absolute; inset: 0; pointer-events: none; }
+        .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 3s ease-in-out infinite; }
+        .pricing .section-header { position: relative; z-index: 1; }
+        .pricing .section-title { color: var(--white); }
+        .pricing .section-subtitle { color: rgba(255,255,255,0.6); }
+
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
+        .pricing-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 2.5rem; transition: all 0.4s; display: flex; flex-direction: column; }
+        .pricing-card:hover { transform: translateY(-10px); border-color: var(--green); box-shadow: 0 20px 60px rgba(45,179,163,0.2); }
+        .pricing-card.popular { background: linear-gradient(135deg, rgba(45,179,163,0.15) 0%, rgba(45,179,163,0.05) 100%); border-color: var(--green); transform: scale(1.05); }
+        .pricing-card.popular:hover { transform: scale(1.05) translateY(-10px); }
+        .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--green); color: var(--white); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
+        .pricing-name { font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+        .pricing-description { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .pricing-price { margin-bottom: 1.5rem; }
+        .price-value { font-family: 'Space Mono', monospace; font-size: 2.8rem; font-weight: 700; color: var(--white); }
+        .price-period { font-size: 1rem; color: rgba(255,255,255,0.5); }
+        .pricing-features { list-style: none; margin-bottom: 1.5rem; flex-grow: 1; }
+        .pricing-features li { display: flex; align-items: flex-start; gap: 0.8rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-bottom: 0.8rem; }
+        .pricing-features li svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; margin-top: 2px; }
+        .pricing-note { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; font-style: italic; }
+        .pricing-cta { width: 100%; padding: 1rem 2rem; background: transparent; border: 2px solid var(--green); color: var(--green); font-weight: 700; border-radius: 50px; cursor: pointer; transition: all 0.3s; text-decoration: none; text-align: center; display: block; }
+        .pricing-cta:hover { background: var(--green); color: var(--white); }
+        .pricing-card.popular .pricing-cta { background: var(--green); color: var(--white); }
+
+        .avulsos { padding: 80px 5%; background: var(--gray); }
+        .avulsos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .avulso-card { background: var(--white); border-radius: 16px; padding: 1.5rem; text-align: center; transition: all 0.3s; border: 2px solid transparent; }
+        .avulso-card:hover { border-color: var(--green); transform: translateY(-5px); }
+        .avulso-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .avulso-price { font-family: 'Space Mono', monospace; font-size: 1.5rem; font-weight: 700; color: var(--green); }
+
+        .cta { padding: 100px 5%; background: var(--white); }
+        .cta-content { max-width: 1200px; margin: 0 auto; background: linear-gradient(135deg, var(--green), var(--green-dark)); border-radius: 30px; padding: 4rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+        .cta-text { color: var(--white); }
+        .cta-text h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; }
+        .cta-text p { color: rgba(255,255,255,0.9); }
+        .cta .btn { background: var(--white); color: var(--green); }
+        .cta .btn:hover { background: var(--black); color: var(--white); }
+
+        footer { background: var(--black); color: var(--white); padding: 40px 5%; text-align: center; }
+        footer p { color: rgba(255,255,255,0.6); }
+        footer a { color: var(--green); text-decoration: none; }
+
+        @media (max-width: 1024px) { .services-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); } .pricing-card.popular { transform: scale(1); } .avulsos-grid { grid-template-columns: repeat(2, 1fr); } .cta-content { grid-template-columns: 1fr; text-align: center; } }
+        @media (max-width: 768px) { nav { display: none; } .services-grid, .pricing-grid, .avulsos-grid { grid-template-columns: 1fr; } }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 50 50" fill="none"><path d="M25 5C13.95 5 5 13.95 5 25C5 36.05 13.95 45 25 45C36.05 45 45 36.05 45 25" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/><polygon points="25,5 25,18 38,5" fill="#2DB3A3"/></svg></div>CREATIVE<span>NEXT</span></a>
+        <nav><a href="index.html">Home</a><a href="index.html#servicos">Serviços</a><a href="#planos">Planos</a><a href="#contato" class="btn">Fale Conosco</a></nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <div class="page-tag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg>Marketing & Conteúdo</div>
+            <h1>Conteúdo que <span class="highlight">engaja</span> e <span class="highlight">converte</span></h1>
+            <p>Gestão completa de redes sociais, produção de conteúdo estratégico e criação de materiais que geram resultados reais para o seu negócio.</p>
+            <a href="#planos" class="btn">Ver Planos e Preços</a>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="section-header"><h2 class="section-title">O que oferecemos</h2><p class="section-subtitle">Soluções completas de marketing e produção de conteúdo.</p></div>
+        <div class="services-grid">
+            <div class="service-card reveal"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg></div><h3 class="service-title">Social Media</h3><p class="service-description">Gestão completa das suas redes sociais.</p><ul class="service-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Planejamento de conteúdo</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Calendário editorial</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Postagem Feed, Stories e Reels</li></ul></div>
+            <div class="service-card reveal"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><h3 class="service-title">Produção de Vídeos</h3><p class="service-description">Vídeos estratégicos para redes sociais.</p><ul class="service-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Roteirização</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Edição profissional</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Motion graphics</li></ul></div>
+            <div class="service-card reveal"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3 class="service-title">Copywriting</h3><p class="service-description">Textos persuasivos que vendem.</p><ul class="service-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Copy para criativos</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Legendas estratégicas</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Scripts de vendas</li></ul></div>
+            <div class="service-card reveal"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><h3 class="service-title">Design Gráfico</h3><p class="service-description">Criativos de alto impacto.</p><ul class="service-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Posts para redes sociais</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Criativos para ads</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Identidade visual</li></ul></div>
+            <div class="service-card reveal"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3 class="service-title">Google Meu Negócio</h3><p class="service-description">Presença no Google otimizada.</p><ul class="service-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Criação e otimização</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Gestão de avaliações</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Posts e atualizações</li></ul></div>
+            <div class="service-card reveal"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h3 class="service-title">Padronização Visual</h3><p class="service-description">Identidade visual para redes.</p><ul class="service-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Paleta de cores</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Templates exclusivos</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Destaques e capas</li></ul></div>
+        </div>
+    </section>
+
+    <section class="pricing" id="planos">
+        <div class="stars" id="stars"></div>
+        <div class="section-header"><div class="section-tag">Planos de Gestão de Redes Sociais</div><h2 class="section-title">Escolha o Plano Ideal</h2><p class="section-subtitle">Uma gestão de mídias sociais envolve desde a definição da estratégia, planejamento de publicações e execução até o monitoramento e resultados.</p></div>
+        <div class="pricing-grid">
+            <div class="pricing-card reveal">
+                <h3 class="pricing-name">Creative Start</h3>
+                <p class="pricing-description">Ideal para quem está começando nas redes sociais.</p>
+                <div class="pricing-price"><span class="price-value">R$ 650</span><span class="price-period">/mês</span></div>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>2 Posts por semana (até 8 posts/mês)</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Instagram e Facebook</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Arte (criativo) + Postagem</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Feed, Stories e Reels</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Copy para os criativos</li>
+                </ul>
+                <p class="pricing-note">* Não inclui responder mensagens. Não está incluso produção de vídeos. Padronização de Rede Social: R$ 490,00 (taxa única opcional)</p>
+                <a href="https://wa.me/5579999062129?text=Olá! Tenho interesse no Creative Start" target="_blank" class="pricing-cta">Começar Agora</a>
+            </div>
+            <div class="pricing-card popular reveal" style="position:relative;">
+                <div class="popular-badge">Mais Popular</div>
+                <h3 class="pricing-name">Creative Plus</h3>
+                <p class="pricing-description">Para quem quer mais presença e consistência.</p>
+                <div class="pricing-price"><span class="price-value">R$ 950</span><span class="price-period">/mês</span></div>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>3 Posts por semana (até 12 posts/feed/mês) NÃO INCLUI STORIES</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Instagram e Facebook</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Google Meu Negócio</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Link da bio customizado</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>2 Campanhas Reels</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Arte (criativo) + Postagem</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Planejamento mensal de conteúdo</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Copy para os criativos</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Influencer local à disposição</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><strong>Padronização de Rede Social GRÁTIS</strong></li>
+                </ul>
+                <p class="pricing-note">* Não inclui responder mensagens. Não está incluso produção de vídeos.</p>
+                <a href="https://wa.me/5579999062129?text=Olá! Tenho interesse no Creative Plus" target="_blank" class="pricing-cta">Quero Este Plano</a>
+            </div>
+            <div class="pricing-card reveal">
+                <h3 class="pricing-name">Creative Elite</h3>
+                <p class="pricing-description">Gestão completa para máxima presença digital.</p>
+                <div class="pricing-price"><span class="price-value">R$ 1.590</span><span class="price-period">/mês</span></div>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>3 Posts por semana (até 12 posts/feed/mês) NÃO INCLUI STORIES</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Gestão de até 2 Redes Sociais</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Google Meu Negócio</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Link da bio customizado</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>2 Campanhas Reels</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Arte (criativo) + Postagem</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Planejamento mensal de conteúdo</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Criação de textos para as postagens</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Copy para os criativos</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Influencer local à disposição</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Impulsionamento de posts (Bônus R$100/mês)</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><strong>Padronização de Rede Social GRÁTIS</strong></li>
+                </ul>
+                <p class="pricing-note">* Não inclui responder mensagens. Não está incluso produção de vídeos.</p>
+                <a href="https://wa.me/5579999062129?text=Olá! Tenho interesse no Creative Elite" target="_blank" class="pricing-cta">Escalar Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="avulsos">
+        <div class="section-header"><h2 class="section-title">Serviços Avulsos</h2><p class="section-subtitle">Precisa de algo específico? Confira nossos serviços individuais.</p></div>
+        <div class="avulsos-grid">
+            <div class="avulso-card reveal"><h4 class="avulso-title">Arte para Rede Social</h4><div class="avulso-price">R$ 60</div></div>
+            <div class="avulso-card reveal"><h4 class="avulso-title">Arte + Postagem</h4><div class="avulso-price">R$ 90</div></div>
+            <div class="avulso-card reveal"><h4 class="avulso-title">Pacote 10 Artes</h4><div class="avulso-price">R$ 500</div></div>
+            <div class="avulso-card reveal"><h4 class="avulso-title">Padronização de Rede</h4><div class="avulso-price">R$ 490</div></div>
+            <div class="avulso-card reveal"><h4 class="avulso-title">Influencer divulgação/vídeos</h4><div class="avulso-price">R$ 500</div></div>
+        </div>
+    </section>
+
+    <section class="cta" id="contato">
+        <div class="cta-content">
+            <div class="cta-text"><h2>Vamos criar conteúdo que vende?</h2><p>Entre em contato e receba uma proposta personalizada para o seu negócio.</p></div>
+            <div><a href="https://wa.me/5579999062129?text=Olá! Gostaria de saber mais sobre Marketing e Conteúdo" target="_blank" class="btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>(79) 99906-2129</a></div>
+        </div>
+    </section>
+
+    <footer><p>© 2025 <a href="index.html">CreativeNext</a>. Todos os direitos reservados. | Nossa Senhora da Glória - SE</p></footer>
+
+    <script>
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) { const star = document.createElement('div'); star.className = 'star'; star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%'; star.style.animationDelay = Math.random() * 3 + 's'; starsContainer.appendChild(star); }
+        window.addEventListener('scroll', () => document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50));
+        const reveals = document.querySelectorAll('.reveal');
+        function revealOnScroll() { reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('active'); }); }
+        window.addEventListener('scroll', revealOnScroll); revealOnScroll();
+    </script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tráfego Pago | CreativeNext</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #2DB3A3;
+            --green-dark: #239688;
+            --green-light: #3FCFBD;
+            --black: #1A1A1A;
+            --black-light: #2D2D2D;
+            --white: #FFFFFF;
+            --gray: #F5F5F5;
+            --gray-dark: #888888;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        header.scrolled { padding: 0.7rem 5%; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        .logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.4rem; color: var(--black); text-decoration: none; }
+        .logo-icon { width: 45px; height: 45px; }
+        .logo-icon svg { width: 100%; height: 100%; }
+        .logo span { color: var(--green); }
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { text-decoration: none; color: var(--black); font-weight: 500; font-size: 0.95rem; transition: color 0.3s ease; }
+        nav a:hover { color: var(--green); }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2rem; background: var(--green); color: var(--white); text-decoration: none; font-weight: 600; font-size: 0.95rem; border-radius: 50px; border: none; cursor: pointer; transition: all 0.3s ease; }
+        .btn:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(45,179,163,0.3); }
+
+        .page-hero { padding: 160px 5% 80px; background: linear-gradient(180deg, var(--gray) 0%, var(--white) 100%); text-align: center; position: relative; }
+        .page-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 0%, rgba(45,179,163,0.1) 0%, transparent 50%); pointer-events: none; }
+        .page-hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .page-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(45,179,163,0.1); color: var(--green); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem; }
+        .page-hero h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 1.5rem; line-height: 1.2; }
+        .page-hero h1 .highlight { color: var(--green); }
+        .page-hero p { font-size: 1.2rem; color: var(--gray-dark); line-height: 1.7; margin-bottom: 2rem; }
+
+        .features { padding: 60px 5%; background: var(--white); }
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .feature-card { text-align: center; padding: 2rem; }
+        .feature-icon { width: 70px; height: 70px; background: rgba(45,179,163,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--green); }
+        .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .feature-card p { font-size: 0.9rem; color: var(--gray-dark); line-height: 1.5; }
+
+        .pricing { padding: 100px 5%; background: linear-gradient(180deg, #0a0a0f 0%, #0d1117 50%, #0a0a0f 100%); position: relative; overflow: hidden; }
+        .pricing::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 20%, rgba(45,179,163,0.1) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(45,179,163,0.05) 0%, transparent 40%); pointer-events: none; }
+        .stars { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; }
+        .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 3s ease-in-out infinite; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 4rem; position: relative; z-index: 1; }
+        .section-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(45,179,163,0.1); color: var(--green); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
+        .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.2; color: var(--white); }
+        .section-subtitle { color: rgba(255,255,255,0.6); font-size: 1.1rem; line-height: 1.6; }
+
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+        .pricing-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 2.5rem; position: relative; transition: all 0.4s ease; display: flex; flex-direction: column; }
+        .pricing-card:hover { transform: translateY(-10px); border-color: var(--green); box-shadow: 0 20px 60px rgba(45,179,163,0.2); }
+        .pricing-card.popular { background: linear-gradient(135deg, rgba(45,179,163,0.15) 0%, rgba(45,179,163,0.05) 100%); border-color: var(--green); transform: scale(1.05); }
+        .pricing-card.popular:hover { transform: scale(1.05) translateY(-10px); }
+        .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--green); color: var(--white); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .pricing-icon { width: 60px; height: 60px; margin-bottom: 1.5rem; color: var(--green); }
+        .pricing-name { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+        .pricing-description { color: rgba(255,255,255,0.6); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.5; }
+        .pricing-price { margin-bottom: 1.5rem; }
+        .price-original { font-size: 1.2rem; color: rgba(255,255,255,0.4); text-decoration: line-through; margin-bottom: 0.3rem; }
+        .price-current { display: flex; align-items: baseline; gap: 0.3rem; }
+        .price-currency { font-size: 1.2rem; color: var(--green); font-weight: 600; }
+        .price-value { font-family: 'Space Mono', monospace; font-size: 3rem; font-weight: 700; color: var(--white); line-height: 1; }
+        .price-period { font-size: 1rem; color: rgba(255,255,255,0.5); }
+        .price-note { font-size: 0.8rem; color: var(--green); margin-top: 0.5rem; font-style: italic; }
+        .pricing-features { list-style: none; margin-bottom: 1.5rem; flex-grow: 1; }
+        .pricing-features li { display: flex; align-items: flex-start; gap: 0.8rem; color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 0.8rem; line-height: 1.4; }
+        .pricing-features li svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; margin-top: 2px; }
+        .pricing-bonus { background: rgba(45,179,163,0.1); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
+        .bonus-title { font-size: 0.85rem; font-weight: 700; color: var(--green); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .bonus-title svg { width: 16px; height: 16px; }
+        .bonus-list { list-style: none; }
+        .bonus-list li { color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 0.3rem; padding-left: 1rem; position: relative; }
+        .bonus-list li::before { content: '•'; position: absolute; left: 0; color: var(--green); }
+        .pricing-cta { width: 100%; padding: 1rem 2rem; background: transparent; border: 2px solid var(--green); color: var(--green); font-weight: 700; font-size: 1rem; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; text-align: center; display: block; }
+        .pricing-cta:hover { background: var(--green); color: var(--white); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(45,179,163,0.3); }
+        .pricing-card.popular .pricing-cta { background: var(--green); color: var(--white); }
+        .pricing-card.popular .pricing-cta:hover { background: var(--green-light); }
+
+        .cta { padding: 100px 5%; background: var(--gray); }
+        .cta-content { max-width: 1200px; margin: 0 auto; background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%); border-radius: 30px; padding: 4rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; position: relative; overflow: hidden; }
+        .cta-content::before { content: ''; position: absolute; top: -50%; right: -10%; width: 50%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); }
+        .cta-text { position: relative; z-index: 1; }
+        .cta-text h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; color: var(--white); margin-bottom: 1rem; }
+        .cta-text p { color: rgba(255,255,255,0.9); font-size: 1.1rem; line-height: 1.6; }
+        .cta-buttons { display: flex; gap: 1rem; position: relative; z-index: 1; }
+        .cta .btn { background: var(--white); color: var(--green); }
+        .cta .btn:hover { background: var(--black); color: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+        footer { background: var(--black); color: var(--white); padding: 40px 5%; text-align: center; }
+        footer p { color: rgba(255,255,255,0.6); }
+        footer a { color: var(--green); text-decoration: none; }
+
+        .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+        .mobile-menu-btn span { display: block; width: 25px; height: 3px; background: var(--black); margin: 5px 0; border-radius: 3px; }
+
+        @media (max-width: 1200px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 500px; }
+            .pricing-card.popular { transform: scale(1); }
+            .pricing-card.popular:hover { transform: translateY(-10px); }
+        }
+        @media (max-width: 1024px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-content { grid-template-columns: 1fr; text-align: center; }
+            .cta-buttons { justify-content: center; }
+        }
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .mobile-menu-btn { display: block; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 50 50" fill="none"><path d="M25 5C13.95 5 5 13.95 5 25C5 36.05 13.95 45 25 45C36.05 45 45 36.05 45 25" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/><polygon points="25,5 25,18 38,5" fill="#2DB3A3"/></svg>
+            </div>
+            CREATIVE<span>NEXT</span>
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#servicos">Serviços</a>
+            <a href="index.html#produtos">Produtos</a>
+            <a href="#planos">Planos</a>
+            <a href="#contato" class="btn">Fale Conosco</a>
+        </nav>
+        <button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </header>
+
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <div class="page-tag">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                Tráfego Pago
+            </div>
+            <h1>Escale suas vendas com <span class="highlight">Tráfego Pago</span> de alta performance</h1>
+            <p>Campanhas estratégicas no Meta Ads e Google Ads com foco em conversão, ROI positivo e resultados mensuráveis para o seu negócio.</p>
+            <a href="#planos" class="btn">Ver Planos e Preços</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                </div>
+                <h3>Meta Ads</h3>
+                <p>Facebook e Instagram Ads com segmentação precisa</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <h3>Google Ads</h3>
+                <p>Pesquisa, Display e YouTube Ads</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                </div>
+                <h3>Remarketing</h3>
+                <p>Recupere visitantes e aumente conversões</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <h3>Relatórios</h3>
+                <p>Dashboard em tempo real com métricas</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="planos">
+        <div class="stars" id="stars"></div>
+        <div class="section-header">
+            <div class="section-tag">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Planos de Tráfego Pago
+            </div>
+            <h2 class="section-title">Escolha o Combustível da Sua Decolagem</h2>
+            <p class="section-subtitle">Planos estratégicos desenhados para cada estágio do seu negócio. Do início da jornada à dominação completa do mercado.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card reveal">
+                <div class="pricing-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L8 8H4l8 14 8-14h-4L12 2z"/><path d="M8 8l4 6 4-6" opacity="0.5"/></svg></div>
+                <h3 class="pricing-name">Creative Start</h3>
+                <p class="pricing-description">Ideal para quem está começando e precisa de tráfego qualificado.</p>
+                <div class="pricing-price">
+                    <div class="price-original">R$ 3.000</div>
+                    <div class="price-current"><span class="price-currency">R$</span><span class="price-value">1.500</span><span class="price-period">/mês</span></div>
+                    <div class="price-note">*Valor especial para fechamento na call</div>
+                </div>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Assessoria de Presença Digital</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Gestão de Tráfego Pago</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Relatórios semanais</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Produção de 1 vídeo estratégico/mês</li>
+                </ul>
+                <div class="pricing-bonus">
+                    <div class="bonus-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Bônus de Fechamento</div>
+                    <ul class="bonus-list"><li>Criação de até 8 criativos estáticos/mês</li><li>Planejamento de campanha inicial</li></ul>
+                </div>
+                <a href="https://wa.me/5579999062129?text=Olá! Tenho interesse no plano Creative Start" target="_blank" class="pricing-cta">Começar Agora</a>
+            </div>
+
+            <div class="pricing-card popular reveal">
+                <div class="popular-badge">Mais Popular</div>
+                <div class="pricing-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L8 8H4l8 14 8-14h-4L12 2z"/><circle cx="12" cy="10" r="2" fill="currentColor" opacity="0.3"/><path d="M10 22h4M12 18v4" opacity="0.5"/></svg></div>
+                <h3 class="pricing-name">Creative Performance</h3>
+                <p class="pricing-description">Para empresas que buscam escala e produção de conteúdo estratégico.</p>
+                <div class="pricing-price">
+                    <div class="price-original">R$ 4.300</div>
+                    <div class="price-current"><span class="price-currency">R$</span><span class="price-value">2.500</span><span class="price-period">/mês</span></div>
+                    <div class="price-note">*Valor especial para fechamento na call</div>
+                </div>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Gestão de Tráfego Pago</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Criação de até 10 criativos estratégicos/mês</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Produção de 4 vídeos estratégicos/mês</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Mini Site pra Bio Instagram</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Criação/Manutenção Presença no Google</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Relatórios semanais com insights</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Dashboard de Métricas</li>
+                </ul>
+                <div class="pricing-bonus">
+                    <div class="bonus-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Bônus de Fechamento</div>
+                    <ul class="bonus-list"><li>Criação de até 8 criativos estáticos/mês</li><li>Planejamento de campanha inicial</li></ul>
+                </div>
+                <a href="https://wa.me/5579999062129?text=Olá! Tenho interesse no plano Creative Performance" target="_blank" class="pricing-cta">Acelerar Resultados</a>
+            </div>
+
+            <div class="pricing-card reveal">
+                <div class="pricing-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-60 12 12)"/></svg></div>
+                <h3 class="pricing-name">Creative Órbita 360</h3>
+                <p class="pricing-description">A solução completa para dominar o seu mercado.</p>
+                <div class="pricing-price">
+                    <div class="price-original">R$ 5.300</div>
+                    <div class="price-current"><span class="price-currency">R$</span><span class="price-value">4.500</span><span class="price-period">/mês</span></div>
+                    <div class="price-note">*Valor especial para fechamento na call</div>
+                </div>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Tudo do Plano Performance</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Gestão de Tráfego Pago Avançado</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Até 20 criativos estratégicos/mês</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>8 vídeos estratégicos/mês</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Gestão de conteúdo orgânico</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Social Media estratégico</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Google Meu Negócio completo</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Consultoria de Vendas (CRM)</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Automação WhatsApp</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Landing Page de Alta Conversão</li>
+                </ul>
+                <div class="pricing-bonus">
+                    <div class="bonus-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Bônus de Fechamento</div>
+                    <ul class="bonus-list"><li>Criação de até 8 criativos estáticos/mês</li><li>Planejamento de campanha inicial</li></ul>
+                </div>
+                <a href="https://wa.me/5579999062129?text=Olá! Tenho interesse no plano Creative Órbita 360" target="_blank" class="pricing-cta">Dominar o Mercado</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contato">
+        <div class="cta-content">
+            <div class="cta-text">
+                <h2>Pronto para decolar?</h2>
+                <p>Escolha o plano ideal e comece sua transformação digital hoje mesmo. Fale com nossa equipe!</p>
+            </div>
+            <div class="cta-buttons">
+                <a href="https://wa.me/5579999062129?text=Olá! Gostaria de saber mais sobre os planos de tráfego pago" target="_blank" class="btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    (79) 99906-2129
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 <a href="index.html">CreativeNext</a>. Todos os direitos reservados. | Nossa Senhora da Glória - SE | <a href="mailto:contato@creativenext.com.br">contato@creativenext.com.br</a></p>
+    </footer>
+
+    <script>
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.width = Math.random() * 2 + 1 + 'px';
+            star.style.height = star.style.width;
+            starsContainer.appendChild(star);
+        }
+
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+
+        const reveals = document.querySelectorAll('.reveal');
+        function revealOnScroll() {
+            reveals.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
