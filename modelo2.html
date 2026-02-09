@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Cammino Di Casa - Cardápio Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #e44826;
+            --primary-light: #f5e6e0;
+            --secondary: #556B2F;
+            --accent: #D4AF37;
+            --background: #FFFBF5;
+            --foreground: #1a1a1a;
+            --border: #e0e0e0;
+            --text-muted: #666;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to bottom, var(--primary), rgba(228, 72, 38, 0.9));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+
+        .contact-info {
+            background-color: rgba(85, 107, 47, 0.08);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+        }
+
+        .contact-info-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        @media (min-width: 768px) {
+            .contact-info-content {
+                grid-template-columns: repeat(3, 1fr);
+                text-align: left;
+            }
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .contact-item {
+                justify-content: flex-start;
+            }
+        }
+
+        .contact-item svg {
+            width: 20px;
+            height: 20px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .nav-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem;
+            min-width: min-content;
+        }
+
+        .nav-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid var(--border);
+            background: white;
+            color: var(--foreground);
+            cursor: pointer;
+            border-radius: 0.4rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary);
+            background-color: var(--primary-light);
+        }
+
+        .nav-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .main-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--foreground);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent), transparent);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .menu-item {
+            border: 2px dashed var(--primary);
+            border-radius: 0.4rem;
+            padding: 1.2rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            box-shadow: 0 4px 12px rgba(228, 72, 38, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--foreground);
+            flex: 1;
+        }
+
+        .menu-item-number {
+            background-color: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .menu-item-description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-prices {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .menu-item.expanded .menu-item-prices {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+        }
+
+        .price-option {
+            text-align: center;
+        }
+
+        .price-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .price-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .footer {
+            background-color: var(--primary-light);
+            border-top: 1px solid var(--border);
+            padding: 2rem 1rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="https://i.imgur.com/tznMwb0.png" alt="Cammino Di Casa Logo">
+            </div>
+            <h1>Cammino Di Casa</h1>
+            <p>Cozinha Italiana</p>
+        </header>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <div class="contact-info-content">
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <span>(79) 9 9898-4007</span>
+                </div>
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 7l-7 5 7 5V7z"></path>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                    </svg>
+                    <span>curtioscamminodicasa</span>
+                </div>
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span>Chave Pix: 79998984007</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-container">
+            <div class="nav-buttons" id="navButtons"></div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h2 class="category-title" id="categoryTitle">Pizzas</h2>
+            <div class="menu-grid" id="menuGrid"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Cammino Di Casa - Cozinha Italiana</p>
+            <p>© 2026 Todos os direitos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        // Menu Data
+        const menuData = [
+            {
+                id: 'pizzas',
+                name: 'Pizzas',
+                items: [
+                    { name: 'Siciliana', description: '(Mussarela, camarão e catupiry)', prices: { pequena: 45.00, media: 55.00, grande: 65.00 } },
+                    { name: 'Mediterrânea', description: '(Mussarela, camarão e tomate)', prices: { pequena: 45.00, media: 55.00, grande: 65.00 } },
+                    { name: 'Da Roça', description: '(Mussarela, frango, catupiry e milho)', prices: { pequena: 40.00, media: 50.00, grande: 60.00 } },
+                    { name: 'New Burg', description: '(Mussarela, filé em tiras, cebola e cheddar)', prices: { pequena: 50.00, media: 60.00, grande: 70.00 } },
+                    { name: 'Fazendeira', description: '(Mussarela e calabresa)', prices: { pequena: 38.00, media: 48.00, grande: 58.00 } },
+                    { name: 'Portugal', description: '(Mussarela, presunto, cebola, azeitona e ovos)', prices: { pequena: 42.00, media: 52.00, grande: 62.00 } },
+                    { name: 'Trem Bom', description: '(Mussarela, filé, queijo parmesão e catupiry)', prices: { pequena: 48.00, media: 58.00, grande: 68.00 } },
+                    { name: 'Exagerada', description: '(Mussarela, presunto, calabresa, bacon, catupiry e milho)', prices: { pequena: 52.00, media: 62.00, grande: 72.00 } },
+                    { name: 'Margherita', description: '(Mussarela e tomate)', prices: { pequena: 35.00, media: 45.00, grande: 55.00 } },
+                    { name: 'Capital do Sertão', description: '(Mussarela, molho, cebola, cebola e orégano)', prices: { pequena: 38.00, media: 48.00, grande: 58.00 } },
+                    { name: 'Torino e Cipolla', description: '(Mussarela, molho de tomate, atum, cebola, azeitona e orégano)', prices: { pequena: 45.00, media: 55.00, grande: 65.00 } },
+                    { name: 'Cinco Formaggi', description: '(Mussarela, molho de tomate, queijo parmesão, catupiry e cheddar)', prices: { pequena: 48.00, media: 58.00, grande: 68.00 } },
+                    { name: 'Salmon Cheese', description: '(Salmão marinado, cream cheese, camarão e molho pesto)', prices: { pequena: 55.00, media: 65.00, grande: 75.00 } }
+                ]
+            },
+            {
+                id: 'sobremesas',
+                name: 'Sobremesas',
+                items: [
+                    { name: 'Paleta Mexicana', description: '(Único)', prices: { unico: 15.00 } },
+                    { name: 'Picolé', description: '(Único)', prices: { unico: 8.00 } },
+                    { name: 'Pannacota', description: '(Único)', prices: { unico: 18.00 } }
+                ]
+            },
+            {
+                id: 'pizzas-doces',
+                name: 'Pizzas Doces',
+                items: [
+                    { name: 'Nutella', description: '', prices: { pequena: 35.00, media: 45.00, grande: 55.00 } },
+                    { name: 'Banana com Canela', description: '(Banana em fatias, açúcar, canela e leite condensado)', prices: { pequena: 32.00, media: 42.00, grande: 52.00 } },
+                    { name: 'Romeu e Julieta', description: '(Goiabada e mussarela)', prices: { pequena: 35.00, media: 45.00, grande: 55.00 } },
+                    { name: 'Doce de Leite Argentino', description: '', prices: { pequena: 38.00, media: 48.00, grande: 58.00 } }
+                ]
+            },
+            {
+                id: 'calzone',
+                name: 'Calzone',
+                items: [
+                    { name: 'Calzone Tradicional', description: '(Mussarela, presunto e ovos)', prices: { unico: 45.00 } },
+                    { name: 'Calzone de Carne', description: '(Carne moída, cebola e mussarela)', prices: { unico: 48.00 } },
+                    { name: 'Calzone de Frango', description: '(Frango desfiado, catupiry e mussarela)', prices: { unico: 46.00 } }
+                ]
+            },
+            {
+                id: 'entradas',
+                name: 'Entradas',
+                items: [
+                    { name: 'Bruchettas Tradicionais', description: '', prices: { unico: 26.00 } },
+                    { name: 'Bruchettas Caprese', description: '(Mussarela e tomate)', prices: { unico: 28.00 } },
+                    { name: 'Bruchettas de Bacon com Cebola', description: '', prices: { unico: 30.00 } },
+                    { name: 'Bruchettas de Camarão', description: '', prices: { unico: 35.00 } },
+                    { name: 'Bruchettas Mista', description: '(Camarão, bacon, mussarela e tomate)', prices: { unico: 38.00 } },
+                    { name: 'Tábua de Frios', description: '', prices: { unico: 65.00 } },
+                    { name: 'Camarão Alho e Óleo', description: '', prices: { unico: 42.00 } },
+                    { name: 'Picanha (Aperitivo)', description: '(Acompanha farofa e vinagre)', prices: { unico: 48.00 } },
+                    { name: 'Carne do Sol Acebolada', description: '(Acompanha farofa e vinagre)', prices: { unico: 45.00 } },
+                    { name: 'Batata Frita', description: '', prices: { unico: 18.00 } }
+                ]
+            },
+            {
+                id: 'carnes',
+                name: 'Carnes',
+                items: [
+                    { name: 'Picanha Grill', description: '(Acompanha farofa, vinagre e batata frita)', prices: { meia: 78.00, inteira: 145.00 } },
+                    { name: 'Costela Grill', description: '(Acompanha farofa, vinagre e batata frita)', prices: { meia: 72.00, inteira: 135.00 } },
+                    { name: 'Filé Mignon', description: '(Acompanha farofa, vinagre e batata frita)', prices: { meia: 85.00, inteira: 160.00 } },
+                    { name: 'Carne do Sol', description: '(Acompanha farofa, vinagre e batata frita)', prices: { meia: 65.00, inteira: 120.00 } }
+                ]
+            },
+            {
+                id: 'peixes',
+                name: 'Peixes',
+                items: [
+                    { name: 'Salmão do Atlântico Grill', description: '', prices: { unico: 114.00 } },
+                    { name: 'Camarão Grill', description: '', prices: { unico: 98.00 } },
+                    { name: 'Camarão Gratinado', description: '', prices: { unico: 105.00 } },
+                    { name: 'Pão Afogado com Camarão', description: '', prices: { unico: 52.00 } },
+                    { name: 'Chapa de Frutos do Mar', description: '(Lagosta, camarão, salmão e polvo)', prices: { unico: 185.00 } },
+                    { name: 'Chapa de Frutos do Mar', description: '(Lagosta, camarão e polvo)', prices: { unico: 165.00 } },
+                    { name: 'Chapa de Frutos do Mar', description: '(Camarão e polvo)', prices: { unico: 145.00 } }
+                ]
+            },
+            {
+                id: 'massas',
+                name: 'Massas Artesanais',
+                items: [
+                    { name: 'Espaguete à Carbonara', description: '', prices: { unico: 48.00 } },
+                    { name: 'Penne ao Molho Vermelho', description: '', prices: { unico: 45.00 } },
+                    { name: 'Fettuccine Alfredo', description: '', prices: { unico: 50.00 } },
+                    { name: 'Lasanha à Bolonhesa', description: '', prices: { unico: 52.00 } },
+                    { name: 'Ravioli de Queijo', description: '', prices: { unico: 48.00 } }
+                ]
+            },
+            {
+                id: 'bebidas',
+                name: 'Bebidas',
+                items: [
+                    { name: 'Refrigerante', description: '(Lata ou Garrafa)', prices: { lata: 5.00, garrafa: 8.00 } },
+                    { name: 'Suco Natural', description: '', prices: { unico: 12.00 } },
+                    { name: 'Água Mineral', description: '(Com ou sem gás)', prices: { unico: 4.00 } },
+                    { name: 'Cerveja', description: '(Garrafa 600ml)', prices: { unico: 15.00 } },
+                    { name: 'Vinho Tinto', description: '(Taça)', prices: { unico: 18.00 } }
+                ]
+            },
+            {
+                id: 'drinks',
+                name: 'Drinks',
+                items: [
+                    { name: 'Caipirinha', description: '(Cachaça, limão, açúcar e gelo)', prices: { unico: 22.00 } },
+                    { name: 'Mojito', description: '(Rum branco, hortelã, limão, açúcar e gelo)', prices: { unico: 24.00 } },
+                    { name: 'Margarita', description: '(Tequila, triple sec, suco de limão)', prices: { unico: 26.00 } },
+                    { name: 'Cosmopolitan', description: '(Vodka, licor de cranberry, suco de limão)', prices: { unico: 25.00 } },
+                    { name: 'Daiquiri', description: '(Rum branco, suco de limão e açúcar)', prices: { unico: 23.00 } }
+                ]
+            }
+        ];
+
+        let currentCategory = 'pizzas';
+        let itemCounter = 1;
+
+        // Initialize
+        function init() {
+            renderNavigation();
+            renderCategory('pizzas');
+        }
+
+        function renderNavigation() {
+            const navButtons = document.getElementById('navButtons');
+            navButtons.innerHTML = '';
+            
+            menuData.forEach(category => {
+                const btn = document.createElement('button');
+                btn.className = `nav-btn ${category.id === currentCategory ? 'active' : ''}`;
+                btn.textContent = category.name;
+                btn.onclick = () => renderCategory(category.id);
+                navButtons.appendChild(btn);
+            });
+        }
+
+        function renderCategory(categoryId) {
+            currentCategory = categoryId;
+            itemCounter = 1;
+            
+            const category = menuData.find(c => c.id === categoryId);
+            document.getElementById('categoryTitle').textContent = category.name;
+            
+            const menuGrid = document.getElementById('menuGrid');
+            menuGrid.innerHTML = '';
+            
+            category.items.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'menu-item';
+                itemEl.onclick = (e) => {
+                    e.currentTarget.classList.toggle('expanded');
+                };
+                
+                let pricesHtml = '';
+                if (item.prices) {
+                    Object.entries(item.prices).forEach(([label, price]) => {
+                        const labelText = label.charAt(0).toUpperCase() + label.slice(1);
+                        pricesHtml += `
+                            <div class="price-option">
+                                <div class="price-label">${labelText}</div>
+                                <div class="price-value">R$ ${price.toFixed(2).replace('.', ',')}</div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                itemEl.innerHTML = `
+                    <div class="menu-item-header">
+                        <div class="menu-item-name">${item.name}</div>
+                        <div class="menu-item-number">${itemCounter}</div>
+                    </div>
+                    ${item.description ? `<div class="menu-item-description">${item.description}</div>` : ''}
+                    <div class="menu-item-prices">
+                        ${pricesHtml}
+                    </div>
+                `;
+                
+                menuGrid.appendChild(itemEl);
+                itemCounter++;
+            });
+            
+            renderNavigation();
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
