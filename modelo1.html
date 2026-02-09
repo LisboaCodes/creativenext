@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Cammino Di Casa - Cozinha Italiana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #e44826;
+    --orange-dark: #c43d1f;
+    --gold: #d4a030;
+    --gold-light: #e0b84a;
+    --cream: #fdf5ec;
+    --text-dark: #3a2a1a;
+    --text-heading: #3d3028;
+    --card-bg: rgba(253,245,236,0.95);
+    --card-border: rgba(212,160,48,0.2);
+    --shadow-soft: 0 2px 12px rgba(58,42,26,0.07);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{font-family:'Josefin Sans',sans-serif;background:var(--cream);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+
+  .hero{position:relative;background:var(--orange);text-align:center;padding:2rem 1.5rem 1.6rem;overflow:hidden}
+  .hero-curve{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+  .hero-curve svg{position:absolute;bottom:28%;left:-10%;width:120%;height:auto}
+  .logo-img{width:140px;height:auto;margin:0 auto 0.5rem;display:block;position:relative;z-index:2;animation:fadeDown .8s ease-out;filter:drop-shadow(0 2px 10px rgba(0,0,0,.12))}
+  .hero .subtitle{font-family:'Josefin Sans',sans-serif;font-size:.75rem;font-weight:400;letter-spacing:.35em;text-transform:uppercase;color:var(--text-heading);opacity:.8;position:relative;z-index:2;animation:fadeDown .8s ease-out .15s both}
+
+  .nav-sticky{position:sticky;top:0;z-index:100;background:var(--orange);border-bottom:2px solid var(--gold);box-shadow:0 2px 12px rgba(0,0,0,.15)}
+  .nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding:0 .25rem}
+  .nav-tabs::-webkit-scrollbar{display:none}
+  .nav-tab{flex-shrink:0;padding:.8rem .85rem;font-family:'Josefin Sans',sans-serif;font-size:.63rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(61,48,40,.5);background:none;border:none;cursor:pointer;position:relative;transition:color .3s;white-space:nowrap}
+  .nav-tab.active{color:#fff}
+  .nav-tab.active::after{content:'';position:absolute;bottom:0;left:15%;width:70%;height:2.5px;background:var(--gold);border-radius:2px}
+
+  .menu-section{padding:1.5rem 1rem .5rem}
+  .section-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;padding:0 .15rem}
+  .section-header h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--orange);white-space:nowrap}
+  .section-header .line{flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+
+  .size-selector{display:flex;justify-content:center;gap:.35rem;margin-bottom:1rem;padding:.2rem;background:rgba(228,72,38,.05);border-radius:12px;border:1px solid rgba(228,72,38,.1)}
+  .size-btn{flex:1;max-width:110px;padding:.5rem .4rem;border:none;border-radius:10px;font-family:'Josefin Sans',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);opacity:.45;background:transparent;cursor:pointer;transition:all .3s}
+  .size-btn.active{background:var(--orange);color:#fff;opacity:1;box-shadow:0 2px 10px rgba(228,72,38,.3)}
+
+  .menu-item{background:var(--card-bg);border-radius:12px;padding:.9rem 1rem;margin-bottom:.55rem;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);transition:transform .15s}
+  .menu-item:active{transform:scale(.985)}
+  .item-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem}
+  .item-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:var(--text-heading);line-height:1.25}
+  .item-price{font-family:'Josefin Sans',sans-serif;font-size:.95rem;font-weight:700;color:var(--orange);white-space:nowrap;flex-shrink:0}
+  .item-desc{font-size:.76rem;color:#8a7563;margin-top:.2rem;line-height:1.45;font-weight:300}
+  .prices-all{display:flex;gap:.35rem;margin-top:.4rem;flex-wrap:wrap}
+  .price-tag{font-size:.63rem;font-weight:400;color:#a08c78;background:rgba(228,72,38,.04);padding:.12rem .5rem;border-radius:5px;border:1px solid rgba(228,72,38,.07)}
+  .price-tag span{color:var(--orange);font-weight:700}
+
+  .simple-item{background:var(--card-bg);border-radius:12px;padding:.8rem 1rem;margin-bottom:.45rem;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem;transition:transform .15s}
+  .simple-item:active{transform:scale(.985)}
+  .simple-item .item-left{flex:1}
+  .simple-item .item-name{font-size:.95rem}
+
+  .cat-badge{display:inline-block;font-family:'Josefin Sans',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);background:rgba(228,72,38,.07);border:1px solid rgba(228,72,38,.12);padding:.2rem .65rem;border-radius:6px;margin-bottom:.7rem}
+  .note-box{background:rgba(228,72,38,.03);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:.75rem 1rem;margin:.75rem 0;font-size:.75rem;color:#8a7563;line-height:1.6;font-style:italic}
+
+  .dessert-banner{background:linear-gradient(135deg,rgba(228,72,38,.05),rgba(212,160,48,.07));border:1px solid rgba(212,160,48,.18);border-radius:12px;padding:1.1rem;text-align:center;margin-bottom:.55rem}
+  .dessert-banner .label{font-family:'Josefin Sans',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#a08c78;margin-bottom:.4rem}
+  .dessert-banner .items{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--orange-dark);font-weight:600;line-height:1.6}
+
+  .footer-section{background:var(--orange);padding:1.8rem 1.5rem 3rem;text-align:center;position:relative}
+  .footer-section::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  .footer-logo{width:50px;height:auto;margin:0 auto 1rem;opacity:.2;display:block}
+  .info-cards{display:flex;flex-direction:column;gap:.65rem;max-width:400px;margin:0 auto}
+  .info-card{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:12px;padding:.9rem 1rem;display:flex;align-items:center;gap:.75rem;border:1px solid rgba(255,255,255,.15);text-decoration:none;color:inherit;transition:background .3s}
+  .info-card:active{background:rgba(255,255,255,.22)}
+  .info-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .info-icon svg{width:18px;height:18px;stroke:var(--text-heading);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .info-text{text-align:left}
+  .info-label{font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(61,48,40,.55);margin-bottom:.1rem}
+  .info-value{font-size:.9rem;font-weight:700;color:var(--text-heading)}
+  .wifi-section{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.15)}
+  .wifi-label{font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(61,48,40,.55);margin-bottom:.3rem}
+  .wifi-pass{font-family:'Josefin Sans',sans-serif;font-size:.9rem;font-weight:700;color:var(--text-heading);letter-spacing:.04em;cursor:pointer;padding:.45rem 1rem;background:rgba(255,255,255,.15);border-radius:8px;display:inline-block;transition:background .3s;border:1px solid rgba(255,255,255,.2)}
+  .wifi-pass:active{background:rgba(255,255,255,.28)}
+
+  .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text-heading);color:var(--cream);padding:.6rem 1.5rem;border-radius:10px;font-size:.8rem;font-weight:600;opacity:0;pointer-events:none;transition:all .4s ease;z-index:999;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+  @media(min-width:600px){.menu-section{max-width:520px;margin-left:auto;margin-right:auto}.footer-section .info-cards{max-width:420px}.logo-img{width:160px}}
+  @supports(padding-top:env(safe-area-inset-top)){.hero{padding-top:calc(2rem + env(safe-area-inset-top))}.footer-section{padding-bottom:calc(3rem + env(safe-area-inset-bottom))}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<header class="hero">
+  <div class="hero-curve"><svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d="M-50,50 Q300,10 600,45 T1250,30" stroke="#d4a030" stroke-width="2.5" fill="none" opacity=".45"/><path d="M-50,58 Q350,20 650,52 T1250,38" stroke="#d4a030" stroke-width="1.5" fill="none" opacity=".2"/></svg></div>
+  <img class="logo-img" src="https://i.imgur.com/tznMwb0.png" alt="Cammino Di Casa" onerror="this.style.display='none'">
+  <p class="subtitle">Cozinha Italiana</p>
+</header>
+
+<nav class="nav-sticky">
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-target="entradas">Entradas</button>
+    <button class="nav-tab" data-target="carnes">Carnes</button>
+    <button class="nav-tab" data-target="peixes">Peixes</button>
+    <button class="nav-tab" data-target="massas">Massas</button>
+    <button class="nav-tab" data-target="pizzas">Pizzas</button>
+    <button class="nav-tab" data-target="doces">Doces</button>
+    <button class="nav-tab" data-target="bebidas">Bebidas</button>
+    <button class="nav-tab" data-target="drinks">Drinks</button>
+    <button class="nav-tab" data-target="contato">Contato</button>
+  </div>
+</nav>
+
+<main id="mc"></main>
+
+<script>
+const S={pizza:'p',doce:'p',calzone:'p'};
+const f=v=>'R$ '+v.toFixed(2).replace('.',',');
+const sH=(i,s)=>`<div class="menu-item"><div class="item-top"><div><div class="item-name">${i.name}</div>${i.desc?`<div class="item-desc">${i.desc}</div>`:''}</div><div class="item-price">${f(i[s])}</div></div><div class="prices-all"><div class="price-tag">P: <span>${f(i.p)}</span></div><div class="price-tag">M: <span>${f(i.m)}</span></div><div class="price-tag">G: <span>${f(i.g)}</span></div></div></div>`;
+const iH=i=>`<div class="simple-item"><div class="item-left"><div class="item-name">${i.name}</div>${i.desc?`<div class="item-desc">${i.desc}</div>`:''}</div><div class="item-price">${f(i.price)}</div></div>`;
+const ssH=(g,l)=>`<div class="size-selector" data-group="${g}">${['p','m','g'].map((s,x)=>`<button class="size-btn ${S[g]===s?'active':''}" data-size="${s}">${l[x]}</button>`).join('')}</div>`;
+
+const D={
+e:[{name:"Bruchettas Tradicionais",price:26},{name:"Bruchettas Caprese",desc:"Mussarela e tomate",price:26},{name:"Bruchettas de Bacon com Cebola",price:30},{name:"Bruchettas de Camarão",price:34},{name:"Bruchettas Mista",desc:"Camarão, bacon, mussarela e tomate",price:34},{name:"Tábua de Frios",price:110},{name:"Camarão Alho e Óleo",price:94},{name:"Picanha (Aperitivo)",desc:"Acompanha farofa e vinagre",price:80},{name:"Carne do Sol Acebolada",desc:"Acompanha farofa e vinagre",price:72},{name:"Batata Frita",price:27}],
+c:[{name:"Picanha Grill",price:126},{name:"Chapa Mista",price:134},{name:"Filé Mignon Grill",price:104},{name:"Carne do Sol",price:102},{name:"Pão Afogado em Filé",price:114}],
+px:[{name:"Salmão do Atlântico Grill",price:114},{name:"Camarão Grill",price:102},{name:"Camarão Gratinado",price:106},{name:"Pão Afogado com Camarão",price:119}],
+ch:[{name:"Lagosta, Camarão, Salmão e Polvo",price:224},{name:"Lagosta, Camarão e Polvo",price:184},{name:"Camarão e Polvo",price:164}],
+mA:[{name:"Fettuccine Alla Bolognese",desc:"Talharim ao molho bolonhesa",price:83},{name:"Fettuccine Ai Gamberi",desc:"Talharim ao molho de tomate com camarão",price:93},{name:"Fettuccine Ai Gamberi e Catupiry",desc:"Talharim ao molho branco com camarão e catupiry",price:93},{name:"Fettuccine Ai Frutti Di Mare",desc:"Talharim com camarão e polvo",price:123},{name:"Fettuccine Ai Frutti Di Mare",desc:"Talharim com camarão, lagosta e polvo",price:135},{name:"Fettuccine Ai Salmone",price:93}],
+mI:[{name:"Spaghetti Ai Frutti di Mare",desc:"Spaghetti ao molho de tomate seco fresco com polvo e camarão",price:123},{name:"Spaghetti Ai Gamberi",desc:"Spaghetti ao molho de tomate e camarão",price:93},{name:"Cacio e Pepe au Gamberi",price:108},{name:"Cacio e Pepe con Filleto di Manzo",price:110}],
+pz:[{name:"Siciliana",desc:"Mussarela, camarão e catupiry",p:84,m:94,g:104},{name:"Mediterrânea",desc:"Mussarela, camarão e tomate",p:82,m:92,g:102},{name:"Da Roça",desc:"Mussarela, frango, catupiry e milho",p:66,m:76,g:86},{name:"New Burg",desc:"Mussarela, filé em tiras, cebola e cheddar",p:78,m:88,g:98},{name:"Fazendeira",desc:"Mussarela e calabresa",p:60,m:70,g:80},{name:"Portugal",desc:"Mussarela, presunto, cebola, azeitona e ovos",p:60,m:70,g:80},{name:"Trem Bom",desc:"Mussarela, filé, queijo parmesão e catupiry",p:74,m:84,g:94},{name:"Exagerada",desc:"Mussarela, presunto, calabresa, bacon, catupiry e milho",p:74,m:84,g:94},{name:"Margherita",desc:"Mussarela e tomate",p:50,m:60,g:70},{name:"Capital do Sertão",desc:"Mussarela, bacon, milho, cebola e orégano",p:60,m:70,g:80},{name:"Tonno e Cipolla",desc:"Mussarela, molho de tomate, atum, cebola, azeitonas e orégano",p:62,m:72,g:82},{name:"Cinco Formaggi",desc:"Mussarela, molho de tomate, queijo parmesão, catupiry e cheddar",p:68,m:78,g:88},{name:"Salmon Cheese",desc:"Salmão marinado, cream cheese, camarão e molho pesto",p:96,m:106,g:116}],
+pd:[{name:"Nutella",p:60,m:70,g:80},{name:"Banana com Canela",desc:"Banana em fatias, açúcar, canela e leite condensado",p:50,m:60,g:70},{name:"Romeu e Julieta",desc:"Goiabada e mussarela",p:48,m:58,g:68},{name:"Doce de Leite Argentino",p:58,m:68,g:78}],
+cz:[{name:"Nutella",p:62,m:72,g:82},{name:"Doce de Leite Argentino",p:57,m:67,g:77}],
+bN:[{name:"Água sem Gás",price:3.5},{name:"Água com Gás",price:4.5},{name:"Refrigerante em Lata",price:7},{name:"Refrigerante (1L)",price:10},{name:"Schweppes Citrus",price:8},{name:"Energético Red Bull",price:16},{name:"Jarra de Suco — Morango ou Laranja",price:26},{name:"Copo de Suco — Morango ou Laranja",price:9},{name:"Jarra de Suco — Abacaxi, Manga, Limão, Maracujá, Acerola",price:20},{name:"Copo de Suco — Abacaxi, Manga, Limão, Maracujá, Acerola",price:6}],
+cL:[{name:"Heineken",price:11},{name:"Heineken 0% Álcool",price:11}],
+c6:[{name:"Devassa",price:11},{name:"Heineken",price:18},{name:"Baden",price:16},{name:"Amstel",price:13},{name:"Chopp",price:13}],
+wk:[{name:"Red Label (8 Anos)",price:25},{name:"Black Label (12 Anos)",price:31},{name:"Old Parr (12 Anos)",price:29},{name:"Ballantines",price:25}],
+dk:[{name:"Vodka Absolut",price:13},{name:"Kamikaze Incendiário",desc:"Licor de chocolate, cachaça & cointreau em chamas",price:12},{name:"Cu de Burro",desc:"Mel, canela, cachaça e suco de limão",price:14},{name:"Gin Tônica",desc:"Gin e suco de laranja",price:18},{name:"Aperol",desc:"Rodelas de laranja e gelo",price:22},{name:"Caipifrisante",desc:"Vinho, abacaxi e morango",price:26},{name:"Jorge Amado",desc:"Cachaça Gabriela, limão e maracujá",price:30},{name:"Tieta",desc:"Cachaça Gabriela, limão, maracujá e caju",price:33}],
+cq:[{name:"Sem Álcool",price:17},{name:"Smirnoff",price:19},{name:"Absolut",price:21}],
+ck:[{name:"Smirnoff",price:22},{name:"Absolut",price:24}],
+cr:[{name:"Cachaça Envelhecida",desc:"Limão e abacaxi",price:20}]
+};
+
+const b=t=>`<div class="cat-badge">${t}</div>`;
+const sec=(id,t,c)=>`<section class="menu-section" id="${id}"><div class="section-header"><h2>${t}</h2><div class="line"></div></div>${c}</section>`;
+const sp=`<div style="margin-top:.5rem">`;
+
+function build(){
+let h='';
+h+=sec('entradas','Entradas',D.e.map(iH).join(''));
+h+=sec('carnes','Carnes',D.c.map(iH).join(''));
+h+=sec('peixes','Peixes & Frutos do Mar',D.px.map(iH).join('')+b('Chapas de Frutos do Mar')+D.ch.map(iH).join(''));
+h+=sec('massas','Massas',b('Massas Artesanais')+D.mA.map(iH).join('')+sp+b('Massas Italianas Importadas')+'</div>'+D.mI.map(iH).join(''));
+h+=sec('pizzas','Pizzas',ssH('pizza',['Pequena','Média','Grande'])+'<div id="pizza-items">'+D.pz.map(i=>sH(i,S.pizza)).join('')+'</div>');
+h+=sec('doces','Pizzas Doces & Calzones',b('Pizzas Doces')+ssH('doce',['Pequena','Média','Grande'])+'<div id="doce-items">'+D.pd.map(i=>sH(i,S.doce)).join('')+'</div>'+sp+b('Calzones')+'</div>'+ssH('calzone',['Pequeno','Médio','Grande'])+'<div id="calzone-items">'+D.cz.map(i=>sH(i,S.calzone)).join('')+'</div>');
+h+=`<section class="menu-section"><div class="dessert-banner"><div class="label">Sobremesas</div><div class="items">Paleta Mexicana · Picolé · Pannacota</div></div></section>`;
+h+=sec('bebidas','Bebidas',b('Não Alcoólicas')+D.bN.map(iH).join('')+sp+b('Cervejas Long Neck')+'</div>'+D.cL.map(iH).join('')+sp+b('Cervejas 600ml')+'</div>'+D.c6.map(iH).join('')+sp+b('Whiskeys')+'</div>'+D.wk.map(iH).join(''));
+h+=sec('drinks','Drinks & Coquetéis',b('Drinks')+D.dk.map(iH).join('')+sp+b('Coquetel de Frutas')+'</div>'+D.cq.map(iH).join('')+sp+b('Caipiroska')+'</div><div class="item-desc" style="margin:-.3rem 0 .4rem;font-size:.76rem;color:#8a7563">Morango, limão e abacaxi</div>'+D.ck.map(iH).join('')+sp+b('Caipirinha')+'</div>'+D.cr.map(iH).join('')+'<div class="note-box">* Consulte as frutas disponíveis com o garçom.<br>* Consulte nossa carta de vinhos com o garçom.<br>* Fazemos reservas para Casamentos e Aniversários.</div>');
+
+h+=`<section class="footer-section" id="contato">
+  <img class="footer-logo" src="https://i.imgur.com/tznMwb0.png" alt="" onerror="this.style.display='none'">
+  <div class="info-cards">
+    <a href="tel:+5579998984007" class="info-card">
+      <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+      <div class="info-text"><div class="info-label">Contato</div><div class="info-value">(79) 9 9898-4007</div></div>
+    </a>
+    <div class="info-card" onclick="copyPix()">
+      <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div class="info-text"><div class="info-label">Chave Pix — toque para copiar</div><div class="info-value">79998984007</div></div>
+    </div>
+  </div>
+  <div class="wifi-section">
+    <div class="wifi-label">🔒 Senha do Wi-Fi</div>
+    <div class="wifi-pass" onclick="copyWifi()">curtimoscamminodicasa</div>
+  </div>
+</section>`;
+
+document.getElementById('mc').innerHTML=h;
+
+document.querySelectorAll('.size-selector').forEach(sel=>{
+  const g=sel.dataset.group;
+  sel.querySelectorAll('.size-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      sel.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');S[g]=btn.dataset.size;
+      const c=document.getElementById(g+'-items');if(!c)return;
+      const items=g==='pizza'?D.pz:g==='doce'?D.pd:D.cz;
+      c.innerHTML=items.map(i=>sH(i,S[g])).join('');
+    });
+  });
+});
+}
+
+const ids=['entradas','carnes','peixes','massas','pizzas','doces','bebidas','drinks','contato'];
+document.querySelectorAll('.nav-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const el=document.getElementById(tab.dataset.target);
+    if(el){const off=document.querySelector('.nav-sticky').offsetHeight;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-off-8,behavior:'smooth'});}
+    tab.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+  });
+});
+let tk=false;
+window.addEventListener('scroll',()=>{
+  if(tk)return;tk=true;
+  requestAnimationFrame(()=>{
+    const nh=document.querySelector('.nav-sticky').offsetHeight+40;
+    let cur=ids[0];
+    for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=nh)cur=id;}
+    document.querySelectorAll('.nav-tab').forEach(t=>t.classList.toggle('active',t.dataset.target===cur));
+    tk=false;
+  });
+},{passive:true});
+
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+function copyPix(){navigator.clipboard.writeText('79998984007').then(()=>showToast('Chave Pix copiada! ✓'));}
+function copyWifi(){navigator.clipboard.writeText('curtimoscamminodicasa').then(()=>showToast('Senha Wi-Fi copiada! ✓'));}
+
+build();
+</script>
+</body>
+</html>
