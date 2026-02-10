@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Minha Bio | Links Úteis</title>
+    <meta name="description" content="Catálogo, consultoria e publicidades. Conheça nossos serviços." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(to bottom, #e9e5e4, #f5f2f0);
+            color: #2a2a2a;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Main Layout */
+        .page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header / Profile Section */
+        .header-section {
+            padding: 4rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-image-wrapper {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            animation: fadeInScale 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .profile-image-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        @media (min-width: 768px) {
+            .profile-image-container {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        .profile-image-bg {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d36a88, #684e91);
+            opacity: 0.1;
+            filter: blur(20px);
+        }
+
+        .profile-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.4);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: box-shadow 0.5s ease;
+        }
+
+        .profile-image-container {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 4px solid white;
+        }
+
+        .profile-image:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Title and Description */
+        .header-content {
+            text-align: center;
+            max-width: 42rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .header-content h1 {
+            font-size: 2.25rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #2a2a2a;
+        }
+
+        @media (min-width: 768px) {
+            .header-content h1 {
+                font-size: 3rem;
+            }
+        }
+
+        .header-content p {
+            font-size: 1.125rem;
+            color: #5a5a5a;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .divider-decorative {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .divider-line {
+            height: 4px;
+            width: 3rem;
+            background: linear-gradient(to right, transparent, #d36a88);
+        }
+
+        .divider-line.right {
+            background: linear-gradient(to left, transparent, #d36a88);
+        }
+
+        .divider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #d36a88;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem 1rem;
+            max-width: 42rem;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Service Cards */
+        .services-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 1rem;
+            animation: slideInLeft 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .service-card:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .service-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .service-card:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+            border-color: #d36a88;
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, #f5f2f0, #ede9e6);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, #d36a88, #684e91);
+            color: white;
+        }
+
+        .service-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #2a2a2a;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover .service-title {
+            color: #d36a88;
+        }
+
+        .service-description {
+            font-size: 0.875rem;
+            color: #5a5a5a;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #d36a88;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 0.75rem;
+        }
+
+        .service-link svg {
+            width: 1rem;
+            height: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Divider */
+        .divider-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+
+        .divider-section .divider-line {
+            flex: 1;
+        }
+
+        /* Social Links */
+        .social-section {
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+
+        .social-section h3 {
+            text-align: center;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            color: #2a2a2a;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #d36a88;
+            color: #d36a88;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            background-color: #d36a88;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(211, 106, 136, 0.3);
+        }
+
+        .social-link svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid #e9e5e4;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: #5a5a5a;
+            font-size: 0.875rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-credit {
+            color: #8a8a8a;
+            font-size: 0.75rem;
+        }
+
+        .heart {
+            color: #d36a88;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(1rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-1rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header-section {
+                padding: 2rem 1rem;
+            }
+
+            .header-content h1 {
+                font-size: 1.875rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header / Profile Section -->
+        <section class="header-section">
+            <!-- Profile Image -->
+            <div class="profile-image-wrapper">
+                <div class="profile-image-container">
+                    <div class="profile-image-bg"></div>
+                    <img 
+                        src="https://i.imgur.com/DG6cTUh.jpeg" 
+                        alt="Perfil" 
+                        class="profile-image"
+                    />
+                </div>
+            </div>
+
+            <!-- Title and Description -->
+            <div class="header-content">
+                <h1>Bem-vindo (a)</h1>
+                <p>Descubra nossas soluções e serviços exclusivos</p>
+                
+                <!-- Decorative Divider -->
+                <div class="divider-decorative">
+                    <div class="divider-line"></div>
+                    <div class="divider-dot"></div>
+                    <div class="divider-line right"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <section class="main-content">
+            <!-- Service Cards -->
+            <div class="services-grid">
+                <!-- Catálogo Card -->
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <div class="service-content">
+                        <h3 class="service-title">Catálogo</h3>
+                        <p class="service-description">Conheça todos os nossos produtos e serviços</p>
+                        <a href="#catalogo" class="service-link">
+                            Ver Catálogo
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Consultoria Card -->
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <div class="service-content">
+                        <h3 class="service-title">Consultoria</h3>
+                        <p class="service-description">Atendimento personalizado para suas necessidades</p>
+                        <a href="#consultoria" class="service-link">
+                            Agendar
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Publicidades Card -->
+                <div class="service-card">
+                    <div class="service-icon">📢</div>
+                    <div class="service-content">
+                        <h3 class="service-title">Publicidades</h3>
+                        <p class="service-description">Oportunidades de parcerias e publicidade</p>
+                        <a href="#publicidade" class="service-link">
+                            Saiba Mais
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="divider-section">
+                <div class="divider-line"></div>
+                <div class="divider-dot"></div>
+                <div class="divider-line right"></div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-section">
+                <h3>Conecte-se conosco</h3>
+                <div class="social-links">
+                    <a href="#instagram" class="social-link" aria-label="Instagram" title="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <circle cx="17.5" cy="6.5" r="1.5"></circle>
+                        </svg>
+                    </a>
+                    <a href="#linkedin" class="social-link" aria-label="LinkedIn" title="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="#whatsapp" class="social-link" aria-label="WhatsApp" title="WhatsApp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </a>
+                    <a href="#email" class="social-link" aria-label="Email" title="Email">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">© 2025. Todos os direitos reservados.</p>
+            <p class="footer-credit">Feito com <span class="heart">♥</span> para você</p>
+        </footer>
+    </div>
+</body>
+</html>
