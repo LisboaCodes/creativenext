@@ -148,7 +148,7 @@
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 1fr;
             gap: 16px;
             margin-bottom: 32px;
             max-width: 500px;
@@ -170,6 +170,11 @@
         .info-card:hover {
             background-color: rgba(255, 255, 255, 0.05);
             border-color: var(--gold);
+        }
+
+        .info-card.schedule {
+            padding: 20px;
+            align-items: flex-start;
         }
 
         .info-icon {
@@ -206,6 +211,47 @@
             font-size: 13px;
             color: rgba(255, 255, 255, 0.8);
             font-weight: 500;
+        }
+
+        .schedule-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-radius: 6px;
+            border-left: 2px solid var(--gold);
+        }
+
+        .schedule-day {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            min-width: 80px;
+            font-weight: 500;
+        }
+
+        .schedule-time {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+
+        .schedule-note {
+            margin-top: 12px;
+            padding: 10px;
+            background-color: rgba(201, 169, 97, 0.1);
+            border-radius: 6px;
+            border-left: 2px solid var(--gold);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
         }
 
         .divider {
@@ -545,7 +591,7 @@
                 <div class="divider"></div>
 
                 <div class="info-grid">
-                    <div class="info-card">
+                    <div class="info-card schedule">
                         <div class="info-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <circle cx="12" cy="12" r="10"></circle>
@@ -553,8 +599,20 @@
                             </svg>
                         </div>
                         <div class="info-text">
-                            <div class="info-label">Horário</div>
-                            <div class="info-value">Ter a Sáb - Sem fechar</div>
+                            <div class="info-label">Horário de Funcionamento</div>
+                            <div class="schedule-list">
+                                <div class="schedule-item">
+                                    <div class="schedule-day">Terça a Sexta</div>
+                                    <div class="schedule-time">09:00 às 20:00</div>
+                                </div>
+                                <div class="schedule-item">
+                                    <div class="schedule-day">Sábado</div>
+                                    <div class="schedule-time">08:00 às 18:00</div>
+                                </div>
+                            </div>
+                            <div class="schedule-note">
+                                ⚡ Não fechamos para almoço
+                            </div>
                         </div>
                     </div>
 
