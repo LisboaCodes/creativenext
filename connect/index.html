@@ -317,6 +317,69 @@
             stroke-width: 2;
         }
 
+        /* Services Section */
+        .services-section {
+            margin-bottom: 48px;
+        }
+
+        .services-title {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .services-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--gold);
+            transform: translateY(-4px);
+        }
+
+        .service-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(201, 169, 97, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .service-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gold);
+        }
+
+        .service-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--white);
+            line-height: 1.4;
+        }
+
         /* FAQ Section */
         .faq-section {
             margin-bottom: 48px;
@@ -441,6 +504,10 @@
                 grid-template-columns: 1fr;
                 gap: 12px;
             }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -543,6 +610,25 @@
                     </div>
                 </a>
 
+                <a href="#services" class="link-button">
+                    <div class="link-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                            <line x1="16" y1="8" x2="2" y2="22"></line>
+                            <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                        </svg>
+                    </div>
+                    <div class="link-content">
+                        <div class="link-title">Nossos Serviços</div>
+                        <div class="link-description">Conheça todos os serviços oferecidos</div>
+                    </div>
+                    <div class="link-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
                 <a href="https://www.instagram.com/connectbarber_ofc/" target="_blank" rel="noopener noreferrer" class="link-button">
                     <div class="link-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -584,6 +670,166 @@
 
             <div class="divider"></div>
 
+            <!-- Services Section -->
+            <section class="services-section" id="services">
+                <h2 class="services-title">Nossos Serviços</h2>
+                <p class="services-subtitle">Atendimento completo e personalizado</p>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                                <line x1="16" y1="8" x2="2" y2="22"></line>
+                                <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                            </svg>
+                        </div>
+                        <div class="service-name">Corte de Cabelo Masculino</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Design e Modelagem de Barba</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M12 1v6m0 6v6"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Design de Sobrancelha</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Limpeza Facial Profunda</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                <path d="M2 17l10 5 10-5"></path>
+                                <path d="M2 12l10 5 10-5"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Spa da Barba Premium</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Alinhamento de Fios (Selagem e Relaxamento)</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Aplicação de Prótese Capilar</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Manutenção de Prótese Capilar</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Consultoria de Visagismo</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                                <line x1="16" y1="8" x2="2" y2="22"></line>
+                            </svg>
+                        </div>
+                        <div class="service-name">Preenchimento de Barba</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            </svg>
+                        </div>
+                        <div class="service-name">Pigmentação de Barba</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Hidratação e Reconstrução Capilar</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="8" r="7"></circle>
+                                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                            </svg>
+                        </div>
+                        <div class="service-name">Corte Infantil</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 12h8"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Coloração Capilar</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                                <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                            </svg>
+                        </div>
+                        <div class="service-name">Epilação de Nariz e Orelha</div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
             <!-- FAQ Section -->
             <section class="faq-section" id="faq">
                 <h2 class="faq-title">Dúvidas Frequentes</h2>
@@ -592,11 +838,6 @@
                     <div class="faq-item">
                         <h3 class="faq-question">Como fazer agendamento?</h3>
                         <p class="faq-answer">Agendamentos via WhatsApp, ligação ou app Barber (disponível para Android e iOS).</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3 class="faq-question">Quais serviços estão disponíveis?</h3>
-                        <p class="faq-answer">Oferecemos corte de cabelo masculino, barba, design de sobrancelha, limpeza facial, spa da barba, alinhamento de fios (selagem e relaxamento), aplicação de prótese capilar, manutenção de prótese capilar, consultoria de visagismo, preenchimento de barba, pigmentação de barba, hidratação e reconstrução capilar, corte infantil, coloração capilar e epilação de nariz e orelha.</p>
                     </div>
 
                     <div class="faq-item">
