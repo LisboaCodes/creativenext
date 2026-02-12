@@ -429,6 +429,59 @@
                 padding: 1rem;
             }
         }
+
+        /* Modal Gallery */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .close {
+            color: #fff;
+            position: absolute;
+            top: -20px;
+            right: 0px;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .video-item iframe {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -471,7 +524,7 @@
                     <div class="service-content">
                         <h3 class="service-title">Catálogo</h3>
                         <p class="service-description">Conheça todos os nossos produtos e serviços</p>
-                        <a href="#catalogo" class="service-link">
+                        <a href="https://wa.me/5579999931510?text=Gostaria%20de%20solicitar%20o%20cat%C3%A1logo" target="_blank" rel="noopener noreferrer" class="service-link">
                             Ver Catálogo
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -487,7 +540,7 @@
                     <div class="service-content">
                         <h3 class="service-title">Consultoria</h3>
                         <p class="service-description">Atendimento personalizado para suas necessidades</p>
-                        <a href="#consultoria" class="service-link">
+                        <a href="https://wa.me/5579999931510" target="_blank" rel="noopener noreferrer" class="service-link">
                             Agendar
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -560,5 +613,42 @@
             <p class="footer-credit">Feito com <span class="heart">♥</span> para você</p>
         </footer>
     </div>
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="video-container">
+                <div class="video-item"><iframe src="https://www.youtube.com/embed/QjCzio6xlHg" title="Vídeo YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                <div class="video-item"><iframe src="https://www.youtube.com/embed/f9DB0tRlAjY" title="Vídeo YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                <div class="video-item"><iframe src="https://www.youtube.com/embed/ihXJKUyrCT8" title="Vídeo YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                <div class="video-item"><iframe src="https://www.youtube.com/embed/isNBQSL1m0A" title="Vídeo YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                <div class="video-item"><iframe src="https://www.youtube.com/embed/Wf7dbOHrB2w" title="Vídeo YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                <div class="video-item"><iframe src="https://www.youtube.com/embed/H5mGgTdlP2o" title="Vídeo YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                <div class="video-item"><iframe src="https://www.youtube.com/embed/aaE3W0UCQx4" title="Vídeo YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById("videoModal");
+            var link = document.querySelector('a[href="#publicidade"]');
+            var span = document.getElementsByClassName("close")[0];
+
+            link.onclick = function(event) {
+                event.preventDefault();
+                modal.style.display = "block";
+            }
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
 </body>
 </html>
