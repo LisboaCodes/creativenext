@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Dia da Mulher — Galeria Porto Plaza</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #F4A7B9;
+    --deep-rose: #C96B8A;
+    --blush: #FDE8EE;
+    --petal: #F9D0DC;
+    --ivory: #FFF8F5;
+    --gold: #D4A96A;
+    --dark: #2A1520;
+    --soft: #7B4F5E;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ivory);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #fce4ec 0%, #f8bbd0 30%, #e91e8c10 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 24px 80px;
+    text-align: center;
+  }
+
+  /* petal blobs */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, #f48fb1aa 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, #f06292aa 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%       { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1.5px solid var(--rose);
+    color: var(--deep-rose);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 2;
+    animation: fadeDown .8s ease both;
+  }
+  .badge span { font-size: 16px; }
+
+  .hero-date {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--deep-rose);
+    position: relative;
+    z-index: 2;
+    animation: fadeDown .9s .1s ease both;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 12vw, 110px);
+    font-weight: 700;
+    line-height: .92;
+    color: var(--dark);
+    position: relative;
+    z-index: 2;
+    animation: fadeDown 1s .2s ease both;
+    margin-bottom: 8px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--deep-rose);
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 4vw, 26px);
+    font-weight: 300;
+    color: var(--soft);
+    max-width: 540px;
+    line-height: 1.5;
+    position: relative;
+    z-index: 2;
+    animation: fadeDown 1s .35s ease both;
+    margin: 20px auto 0;
+  }
+
+  .flowers-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    font-size: 28px;
+    margin: 28px 0;
+    position: relative;
+    z-index: 2;
+    animation: fadeDown 1s .5s ease both;
+  }
+  .flowers-row span {
+    display: inline-block;
+    animation: sway 3s ease-in-out infinite;
+  }
+  .flowers-row span:nth-child(2) { animation-delay: .4s; }
+  .flowers-row span:nth-child(3) { animation-delay: .8s; }
+  .flowers-row span:nth-child(4) { animation-delay: 1.2s; }
+  .flowers-row span:nth-child(5) { animation-delay: 1.6s; }
+  @keyframes sway {
+    0%,100% { transform: rotate(-8deg); }
+    50%      { transform: rotate(8deg); }
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--deep-rose), #e91e8c);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 18px 44px;
+    border-radius: 100px;
+    text-decoration: none;
+    position: relative;
+    z-index: 2;
+    animation: fadeDown 1s .65s ease both;
+    box-shadow: 0 12px 40px #c96b8a55;
+    transition: transform .2s, box-shadow .2s;
+    margin-top: 8px;
+  }
+  .cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 50px #c96b8a77;
+  }
+
+  /* ── DESCONTO HERO ── */
+  .discount-strip {
+    background: linear-gradient(135deg, var(--deep-rose), #ad1457);
+    color: white;
+    text-align: center;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .discount-strip::before {
+    content: '✦ EXCLUSIVO ✦ EXCLUSIVO ✦ EXCLUSIVO ✦ EXCLUSIVO ✦';
+    position: absolute;
+    top: 8px; left: 0; right: 0;
+    font-size: 9px;
+    letter-spacing: 3px;
+    opacity: .4;
+  }
+  .discount-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(72px, 18vw, 140px);
+    font-weight: 700;
+    line-height: 1;
+    color: white;
+    display: block;
+  }
+  .discount-label {
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: .85;
+    margin-top: -8px;
+    display: block;
+  }
+  .discount-note {
+    margin-top: 12px;
+    font-size: 12px;
+    opacity: .7;
+    font-style: italic;
+  }
+
+  /* ── CARDS DE BENEFÍCIOS ── */
+  .section {
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--deep-rose);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 6vw, 52px);
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.1;
+    margin-bottom: 56px;
+  }
+  .section-title em { font-style: italic; color: var(--deep-rose); }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px 32px;
+    text-align: center;
+    border: 1.5px solid #f8d7e3;
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px #f4a7b930;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rose), var(--deep-rose));
+  }
+
+  .card-icon {
+    font-size: 52px;
+    display: block;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 12px #f4a7b955);
+  }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+  .card p {
+    font-size: 14px;
+    color: var(--soft);
+    line-height: 1.7;
+  }
+  .card .highlight {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--deep-rose);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-top: 16px;
+  }
+
+  /* ── CAFÉ ESPECIAL ── */
+  .cafe-section {
+    background: linear-gradient(135deg, var(--blush) 0%, #fce4ec 100%);
+    padding: 80px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cafe-section::after {
+    content: '☕';
+    position: absolute;
+    font-size: 300px;
+    opacity: .05;
+    bottom: -60px;
+    right: -40px;
+    pointer-events: none;
+  }
+
+  .cafe-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .cafe-inner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 7vw, 58px);
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .cafe-inner h2 em { font-style: italic; color: var(--deep-rose); }
+  .cafe-inner p {
+    font-size: 16px;
+    color: var(--soft);
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+
+  .cafe-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .cafe-item {
+    background: white;
+    border: 1.5px solid var(--rose);
+    border-radius: 100px;
+    padding: 10px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--deep-rose);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── COMO FUNCIONA ── */
+  .steps {
+    padding: 80px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    position: relative;
+  }
+  .steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 32px; left: 10%; right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rose), var(--deep-rose), var(--rose));
+    z-index: 0;
+  }
+
+  .step {
+    text-align: center;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .step-num {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 24px #c96b8a44;
+  }
+  .step h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .step p {
+    font-size: 13px;
+    color: var(--soft);
+    line-height: 1.6;
+  }
+
+  /* ── QR / CTA FINAL ── */
+  .cta-section {
+    background: linear-gradient(160deg, #880e4f 0%, #c2185b 50%, #e91e8c 100%);
+    padding: 80px 24px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '♥';
+    font-size: 400px;
+    position: absolute;
+    opacity: .04;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 7vw, 58px);
+    font-weight: 700;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
+    line-height: 1.1;
+  }
+  .cta-section p {
+    font-size: 16px;
+    opacity: .8;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .qr-box {
+    display: inline-block;
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    position: relative;
+    z-index: 2;
+    margin-bottom: 40px;
+  }
+  .qr-placeholder {
+    width: 160px; height: 160px;
+    background:
+      repeating-conic-gradient(#2A1520 0% 25%, white 0% 50%) 0 0 / 10px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 1px;
+    position: relative;
+  }
+  /* QR inner white center */
+  .qr-placeholder::after {
+    content: 'QR CODE\nAQUI';
+    position: absolute;
+    background: white;
+    color: var(--dark);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: center;
+    white-space: pre;
+  }
+
+  .qr-label {
+    font-size: 11px;
+    color: var(--soft);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 12px;
+    font-weight: 500;
+  }
+
+  .perks-final {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .perk-chip {
+    background: rgba(255,255,255,.15);
+    border: 1.5px solid rgba(255,255,255,.3);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 40px 24px;
+  }
+  footer .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--rose);
+    display: block;
+    margin-bottom: 8px;
+  }
+  footer p {
+    font-size: 12px;
+    opacity: .45;
+    letter-spacing: 1px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PETALS floating deco ── */
+  .petal-deco {
+    pointer-events: none;
+    position: absolute;
+    font-size: 20px;
+    opacity: .25;
+    animation: drift linear infinite;
+    z-index: 0;
+  }
+  @keyframes drift {
+    from { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+    10%  { opacity: .35; }
+    90%  { opacity: .35; }
+    to   { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .stores-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .store-tag {
+    background: linear-gradient(135deg, var(--blush), #fce4ec);
+    border: 1.5px solid var(--rose);
+    color: var(--deep-rose);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 16px;
+    border-radius: 12px;
+    display: block;
+    letter-spacing: .3px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .steps-grid::before { display: none; }
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- floating petals -->
+<div aria-hidden="true">
+  <span class="petal-deco" style="left:10%;animation-duration:12s;animation-delay:0s">🌸</span>
+  <span class="petal-deco" style="left:25%;animation-duration:15s;animation-delay:3s">🌺</span>
+  <span class="petal-deco" style="left:55%;animation-duration:11s;animation-delay:1.5s">🌸</span>
+  <span class="petal-deco" style="left:75%;animation-duration:14s;animation-delay:5s">🌷</span>
+  <span class="petal-deco" style="left:88%;animation-duration:13s;animation-delay:2s">🌸</span>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <p class="hero-date">08 de Março</p>
+  <span class="badge"><span>✦</span> Galeria Porto Plaza <span>✦</span></span>
+  <h1>Feliz Dia<em>da Mulher</em></h1>
+  <p class="hero-sub">Neste dia, você é homenageada com muito carinho, descontos exclusivos e mimos especiais.</p>
+  <div class="flowers-row" aria-hidden="true">
+    <span>🌸</span><span>🌺</span><span>🌷</span><span>🌸</span><span>🌺</span>
+  </div>
+  <a href="#beneficios" class="cta-btn">Ver meus benefícios ↓</a>
+</section>
+
+<!-- ── DESCONTO STRIP ── -->
+<div class="discount-strip">
+  <span class="discount-num">10%</span>
+  <span class="discount-label">de desconto exclusivo nas lojas participantes</span>
+  <p class="discount-note">Válido apenas no dia 08 de março — apresente o QR Code no caixa.</p>
+</div>
+
+<!-- ── BENEFÍCIOS ── -->
+<section class="section" id="beneficios">
+  <p class="section-label">✦ Seus presentes de hoje ✦</p>
+  <h2 class="section-title">Você merece tudo isso<br><em>e muito mais</em></h2>
+  <div class="cards">
+    <div class="card">
+      <span class="card-icon">🏷️</span>
+      <h3>10% de Desconto</h3>
+      <p>Desconto exclusivo nas lojas participantes da Galeria Porto Plaza. Mostre esta tela no momento da compra e aproveite!</p>
+      <div class="stores-list">
+        <span class="store-tag">💎 Smart+ Acessórios</span>
+        <span class="store-tag">👶 Grav&Kids</span>
+        <span class="store-tag">✂️ Ray Gueddes</span>
+        <span class="store-tag">🎨 CreativeNext</span>
+      </div>
+    </div>
+    <div class="card">
+      <span class="card-icon">☕</span>
+      <h3>Café da Manhã Especial</h3>
+      <p>Um café da manhã pensado com muito amor especialmente para você, no coração da Galeria Porto Plaza.</p>
+      <span class="highlight">Café exclusivo</span>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎁</span>
+      <h3>Brindes & Mimos</h3>
+      <p>Surpresas, brindes especiais e muito carinho te esperam ao longo do dia. Porque você é especial todo dia.</p>
+      <span class="highlight">Enquanto durarem os estoques</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── CAFÉ ── -->
+<section class="cafe-section">
+  <div class="cafe-inner">
+    <p class="section-label" style="color:var(--deep-rose)">✦ 08 de Março ✦</p>
+    <h2>Café da Manhã<br><em>feito com amor</em></h2>
+    <p>Um momento só seu — ou com as mulheres que você ama. Venha tomar café na Galeria Porto Plaza e começar o seu dia sendo celebrada.</p>
+    <div class="cafe-items">
+      <span class="cafe-item">☕ Café Especial</span>
+      <span class="cafe-item">🥐 Pãezinhos Frescos</span>
+      <span class="cafe-item">🍓 Frutas da Estação</span>
+      <span class="cafe-item">🧁 Docinhos</span>
+      <span class="cafe-item">🌸 Decoração Floral</span>
+      <span class="cafe-item">🎶 Ambiente Especial</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMO FUNCIONA ── -->
+<section class="steps">
+  <p class="section-label" style="text-align:center">✦ Como resgatar ✦</p>
+  <h2 class="section-title" style="margin-bottom:64px">Simples assim,<em> em 3 passos</em></h2>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Chegue na Galeria</h4>
+      <p>Venha celebrar seu dia na Galeria Porto Plaza e aproveite tudo que preparamos para você.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Mostre no caixa</h4>
+      <p>Apresente esta tela para a atendente da loja e garanta seu 10% de desconto na hora.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Receba seu mimo</h4>
+      <p>Passe pela recepção da Galeria para retirar seu brinde e aproveitar o café.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA FINAL ── -->
+<section class="cta-section">
+  <h2>Sua homenagem<br>começa aqui 💗</h2>
+  <p>Mostre esta tela em qualquer loja participante da Galeria Porto Plaza e seja celebrada do jeito que você merece.</p>
+
+  <div class="perks-final" style="margin-bottom: 40px;">
+    <span class="perk-chip">✦ 10% OFF</span>
+    <span class="perk-chip">☕ Café Especial</span>
+    <span class="perk-chip">🎁 Brindes & Mimos</span>
+    <span class="perk-chip">🌸 08 de Março</span>
+    <span class="perk-chip">💎 Smart+ Acessórios</span>
+    <span class="perk-chip">👶 Grav&Kids</span>
+    <span class="perk-chip">✂️ Ray Gueddes</span>
+    <span class="perk-chip">🎨 CreativeNext</span>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="logo-text">Galeria Porto Plaza</span>
+  <p>© 2025 — Desenvolvido com 💗 para o Dia Internacional da Mulher</p>
+</footer>
+
+<script>
+  // Animate cards on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.animation = `fadeDown .7s ${i * .12}s ease both`;
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: .15 });
+
+  document.querySelectorAll('.card, .step, .cafe-item').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
